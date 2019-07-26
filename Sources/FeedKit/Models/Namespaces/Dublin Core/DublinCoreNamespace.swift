@@ -23,12 +23,32 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// The Dublin Core Metadata Element Set is a standard for cross-domain
 /// resource description.
 /// 
 /// See https://tools.ietf.org/html/rfc5013
-public class DublinCoreNamespace {
+public class DublinCoreNamespace: Mappable {
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        dcTitle <- map["dcTitle"]
+        dcCreator <- map["dcCreator"]
+        dcSubject <- map["dcSubject"]
+        dcCreator <- map["dcCreator"]
+        dcDescription <- map["dcDescription"]
+        dcPublisher <- map["dcPublisher"]
+        dcContributor <- map["dcContributor"]
+        dcDate <- map["dcDate"]
+        dcType <- map["dcType"]
+        dcFormat <- map["dcFormat"]
+        dcIdentifier <- map["dcIdentifier"]
+        dcSource <- map["dcSource"]
+        dcLanguage <- map["dcLanguage"]
+        dcRelation <- map["dcRelation"]
+        dcCoverage <- map["dcCoverage"]
+        dcRights <- map["dcRights"]
+    }
     
     /// A name given to the resource.
     public var dcTitle: String?

@@ -23,10 +23,15 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// A module for the actual content of websites, in multiple formats. 
 /// See http://web.resource.org/rss/1.0/modules/content/
-public class ContentNamespace {
+public class ContentNamespace: Mappable {
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        contentEncoded <- map["contentEncoded"]
+    }
     
     /// An element whose contents are the entity-encoded or CDATA-escaped version
     /// of the content of the item. 

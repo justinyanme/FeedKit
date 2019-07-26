@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// A channel may contain any number of <item>s. An item may represent a
 /// "story" -- much like a story in a newspaper or magazine; if so its
@@ -32,24 +33,41 @@ import Foundation
 /// http://cyber.law.harvard.edu/rss/encodingDescriptions.html), and
 /// the link and title may be omitted. All elements of an item are optional,
 /// however at least one of title or description must be present.
-public class RSSFeedItem {
+public class RSSFeedItem: Mappable {
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        title <- map["title"]
+        link <- map["link"]
+        description <- map["description"]
+        author <- map["author"]
+        categories <- map["categories"]
+        comments <- map["comments"]
+        enclosure <- map["enclosure"]
+        guid <- map["guid"]
+        pubDate <- map["pubDate"]
+        source <- map["source"]
+        dublinCore <- map["dublinCore"]
+        content <- map["content"]
+        iTunes <- map["iTunes"]
+        media <- map["media"]
+    }
     
     /// The title of the item.
     /// 
     /// Example: Venice Film Festival Tries to Quit Sinking
-    public var title: String?
+    public var title: String? = nil
     
     /// The URL of the item.
     /// 
     /// Example: http://nytimes.com/2004/12/07FEST.html
-    public var link: String?
+    public var link: String? = nil
     
     /// The item synopsis.
     /// 
     /// Example: Some of the most heated chatter at the Venice Film Festival this
     /// week was about the way that the arrival of the stars at the Palazzo del 
     /// Cinema was being staged.
-    public var description: String?
+    public var description: String? = nil
     
     /// Email address of the author of the item.
     /// 
@@ -65,7 +83,7 @@ public class RSSFeedItem {
     /// the <author> element.
     /// 
     /// <author>lawyer@boyer.net (Lawyer Boyer)</author>
-    public var author: String?
+    public var author: String? = nil
     
     /// Includes the item in one or more categories.
     /// 
@@ -86,7 +104,7 @@ public class RSSFeedItem {
     /// You may include as many category elements as you need to, for different
     /// domains, and to have an item cross-referenced in different parts of the
     /// same domain.
-    public var categories: [RSSFeedItemCategory]?
+    public var categories: [RSSFeedItemCategory]? = nil
     
     /// URL of a page for comments relating to the item.
     /// 
@@ -100,7 +118,7 @@ public class RSSFeedItem {
     /// 
     /// More about comments here:
     /// http://cyber.law.harvard.edu/rss/weblogComments.html
-    public var comments: String?
+    public var comments: String? = nil
     
     /// Describes a media object that is attached to the item.
     /// 
@@ -114,7 +132,7 @@ public class RSSFeedItem {
     /// 
     /// <enclosure url="http://www.scripting.com/mp3s/weatherReportSuite.mp3" 
     /// length="12216320" type="audio/mpeg" />
-    public var enclosure: RSSFeedItemEnclosure?
+    public var enclosure: RSSFeedItemEnclosure? = nil
     
     /// A string that uniquely identifies the item.
     /// 
@@ -142,7 +160,7 @@ public class RSSFeedItem {
     /// isPermaLink is optional, its default value is true. If its value is false,
     /// the guid may not be assumed to be a url, or a url to anything in 
     /// particular.
-    public var guid: RSSFeedItemGUID?
+    public var guid: RSSFeedItemGUID? = nil
     
     /// Indicates when the item was published.
     /// 
@@ -153,7 +171,7 @@ public class RSSFeedItem {
     /// Its value is a date, indicating when the item was published. If it's a 
     /// date in the future, aggregators may choose to not display the item until 
     /// that date.
-    public var pubDate: Date?
+    public var pubDate: Date? = nil
     
     /// The RSS channel that the item came from.
     /// 
@@ -169,7 +187,7 @@ public class RSSFeedItem {
     /// publicize the sources of news items. It can be used in the Post command
     /// of an aggregator. It should be generated automatically when forwarding
     /// an item from an aggregator to a weblog authoring tool.
-    public var source: RSSFeedItemSource?
+    public var source: RSSFeedItemSource? = nil
     
     
     // MARK: - Namespaces
@@ -178,12 +196,12 @@ public class RSSFeedItem {
     /// resource description.
     /// 
     /// See https://tools.ietf.org/html/rfc5013
-    public var dublinCore: DublinCoreNamespace?
+    public var dublinCore: DublinCoreNamespace? = nil
     
     /// A module for the actual content of websites, in multiple formats.
     /// 
     /// See http://web.resource.org/rss/1.0/modules/content/
-    public var content: ContentNamespace?
+    public var content: ContentNamespace? = nil
 
     /// iTunes Podcasting Tags are de facto standard for podcast syndication. 
     /// see https://help.apple.com/itc/podcasts_connect/#/itcb54353390

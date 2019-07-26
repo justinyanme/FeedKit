@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Specify your podcast artwork using the <a href> attribute in the
 /// <itunes:image> tag. If you do not specify the <itunes:image> tag, the
@@ -49,18 +50,30 @@ import Foundation
 /// size of 3000 x 3000 pixels, in JPEG or PNG format, 72 dpi, with appropriate
 /// file extensions (.jpg, .png), and in the RGB colorspace. These requirements
 /// are different from the standard RSS image tag specifications.
-public class ITunesImage {
+public class ITunesImage: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        attributes <- map["attributes"]
+    }
     
     /// The attributes of the element.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            href <- map["href"]
+        }
         
         /// The image's url.
-        public var href: String?
-        
+        public var href: String? = nil
+        init() {
+            
+        }
     }
 
     /// The element's attributes.
-    public var attributes: Attributes?
+    public var attributes: Attributes? = nil
     
     public init() { }
     

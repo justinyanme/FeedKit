@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Use the <itunes:owner> tag to specify contact information for the podcast 
 /// owner. Include the email address of the owner in a nested <itunes:email> tag 
@@ -30,13 +31,19 @@ import Foundation
 ///
 /// The <itunes:owner> tag information is for administrative communication about 
 /// the podcast and is not displayed on the iTunes Store.
-public class ITunesOwner {
+public class ITunesOwner: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        name <- map["name"]
+        email <- map["email"]
+    }
 
     /// The email address of the owner.
-    public var email: String?
+    public var email: String? = nil
 
     /// The name of the owner.
-    public var name: String?
+    public var name: String? = nil
     
     public init() { }
 

@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Users can browse podcast subject categories in the iTunes Store by choosing 
 /// a category from the Podcasts pop-up menu in the navigation bar. Use the 
@@ -55,21 +56,35 @@ import Foundation
 /// <itunes:category text="Technology">
 ///    <itunes:category text="Gadgets" />
 /// </itunes:category>
-public class ITunesCategory {
+public class ITunesCategory: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        subcategory <- map["subcategory"]
+        attributes <- map["attributes"]
+    }
 
     /// The attributes of the element.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            text <- map["text"]
+        }
         
         /// The primary iTunes Category.
-        public var text: String?
+        public var text: String? = nil
+        init() {
+            
+        }
         
     }
     
     /// The element's attributes.
-    public var attributes: Attributes?
+    public var attributes: Attributes? = nil
     
     /// The iTunes SubCategory.
-    public var subcategory: ITunesSubCategory?
+    public var subcategory: ITunesSubCategory? = nil
     
     public init() { }
     

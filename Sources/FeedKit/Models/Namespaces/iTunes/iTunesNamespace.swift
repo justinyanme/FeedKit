@@ -23,17 +23,40 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// iTunes Podcasting Tags are de facto standard for podcast syndication. For more 
 /// information see https://help.apple.com/itc/podcasts_connect/#/itcb54353390
-public class ITunesNamespace {
+public class ITunesNamespace: Mappable {
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        iTunesAuthor <- map["iTunesAuthor"]
+        iTunesBlock <- map["iTunesBlock"]
+        iTunesCategories <- map["iTunesCategories"]
+        iTunesImage <- map["iTunesImage"]
+        iTunesDuration <- map["iTunesDuration"]
+        iTunesExplicit <- map["iTunesExplicit"]
+        isClosedCaptioned <- map["isClosedCaptioned"]
+        iTunesOrder <- map["iTunesOrder"]
+        iTunesComplete <- map["iTunesComplete"]
+        iTunesNewFeedURL <- map["iTunesNewFeedURL"]
+        iTunesOwner <- map["iTunesOwner"]
+        iTunesSubtitle <- map["iTunesSubtitle"]
+        iTunesSummary <- map["iTunesSummary"]
+        iTunesKeywords <- map["iTunesKeywords"]
+        iTunesType <- map["iTunesType"]
+        iTunesEpisodeType <- map["iTunesEpisodeType"]
+        iTunesSeason <- map["iTunesSeason"]
+        iTunesEpisode <- map["iTunesEpisode"]
+
+    }
 
     /// The content you specify in the <itunes:author> tag appears in the Artist 
     /// column on the iTunes Store. If the tag is not present, the iTunes Store 
     /// uses the contents of the <author> tag. If <itunes:author> is not present 
     /// at the RSS feed level, the iTunes Store uses the contents of the 
     /// <managingEditor> tag.
-    public var iTunesAuthor: String?
+    public var iTunesAuthor: String? = nil
 
     /// Specifying the <itunes:block> tag with a Yes value in:
     ///
@@ -46,7 +69,7 @@ public class ITunesNamespace {
     /// For example, you might want to block a specific episode if you know that 
     /// its content would otherwise cause the entire podcast to be removed from 
     /// the iTunes Store. Specifying any value other than Yes has no effect.
-    public var iTunesBlock: String?
+    public var iTunesBlock: String? = nil
 
     /// Users can browse podcast subject categories in the iTunes Store by choosing
     /// a category from the Podcasts pop-up menu in the navigation bar. Use the 
@@ -79,7 +102,7 @@ public class ITunesNamespace {
     /// <itunes:category text="Technology">
     /// <itunes:category text="Gadgets" />
     /// </itunes:category>
-    public var iTunesCategories: [ITunesCategory]?
+    public var iTunesCategories: [ITunesCategory]? = nil
 
     /// Specify your podcast artwork using the <a href> attribute in the 
     /// <itunes:image> tag. If you do not specify the <itunes:image> tag, the 
@@ -106,7 +129,7 @@ public class ITunesNamespace {
     /// size of 3000 x 3000 pixels, in JPEG or PNG format, 72 dpi, with appropriate 
     /// file extensions (.jpg, .png), and in the RGB colorspace. These requirements 
     /// are different from the standard RSS image tag specifications.
-    public var iTunesImage: ITunesImage?
+    public var iTunesImage: ITunesImage? = nil
 
     /// The content you specify in the <itunes:duration> tag appears in the Time 
     /// column in the List View on the iTunes Store.
@@ -125,7 +148,7 @@ public class ITunesNamespace {
     /// Store displays the number to the left as minutes and the number to the 
     /// right as seconds. If you specify more then two colons, the iTunes Store 
     /// ignores the numbers farthest to the right.
-    public var iTunesDuration: TimeInterval?
+    public var iTunesDuration: TimeInterval? = nil
 
     /// The <itunes:explicit> tag indicates whether your podcast contains explicit 
     /// material. You can specify the following values:
@@ -140,7 +163,7 @@ public class ITunesNamespace {
     /// 
     /// Note: Podcasts containing explicit material are not available in some 
     /// iTunes Store territories.
-    public var iTunesExplicit: String?
+    public var iTunesExplicit: String? = nil
 
     /// Specifying the <itunes:isClosedCaptioned> tag with a Yes value indicates 
     /// that the video podcast episode is embedded with closed captioning and the 
@@ -149,7 +172,7 @@ public class ITunesNamespace {
     ///
     /// Note: If you specify a value other than Yes, no closed-caption indicator 
     /// appears.
-    public var isClosedCaptioned: String?
+    public var isClosedCaptioned: String? = nil
 
     /// Use the <itunes:order> tag to specify the number value in which you would 
     /// like the episode to appear and override the default ordering of episodes 
@@ -158,14 +181,14 @@ public class ITunesNamespace {
     /// For example, if you want an <item> to appear as the first episode of your 
     /// podcast, specify the <itunes:order> tag with 1. If conflicting order 
     /// values are present in multiple episodes, the iTunes Store uses <pubDate>.
-    public var iTunesOrder: Int?
+    public var iTunesOrder: Int? = nil
 
     /// Specifying the <itunes:complete> tag with a Yes value indicates that a 
     /// podcast is complete and you will not post any more episodes in the future. 
     /// This tag is only supported at the <channel> level (podcast).
     ///
     /// Note: If you specify a value other than Yes, nothing happens.
-    public var iTunesComplete: String?
+    public var iTunesComplete: String? = nil
 
     /// Use the <itunes:new-feed-url> tag to manually change the URL where your 
     /// podcast is located. This tag is only supported at a <channel>level 
@@ -174,7 +197,7 @@ public class ITunesNamespace {
     /// <itunes:new-feed-url>http://newlocation.com/example.rss</itunes:new-feed-url>
     /// Note: You should maintain your old feed until you have migrated your e
     /// xisting subscribers. For more information, see Update your RSS feed URL.
-    public var iTunesNewFeedURL: String?
+    public var iTunesNewFeedURL: String? = nil
 
     /// Use the <itunes:owner> tag to specify contact information for the podcast 
     /// owner. Include the email address of the owner in a nested <itunes:email> 
@@ -182,12 +205,12 @@ public class ITunesNamespace {
     ///
     /// The <itunes:owner> tag information is for administrative communication 
     /// about the podcast and is not displayed on the iTunes Store.
-    public var iTunesOwner: ITunesOwner?
+    public var iTunesOwner: ITunesOwner? = nil
 
     /// The content you specify in the <itunes:subtitle> tag appears in the 
     /// Description column on the iTunes Store. For best results, choose a subtitle 
     /// that is only a few words long.
-    public var iTunesSubtitle: String?
+    public var iTunesSubtitle: String? = nil
 
     /// The content you specify in the <itunes:summary> tag appears on the iTunes 
     /// Store page for your podcast. You can specify up to 4000 characters. The 
@@ -195,7 +218,7 @@ public class ITunesNamespace {
     /// Information icon (Information icon) in the Description column. If you do 
     /// not specify a <itunes:summary> tag, the iTunes Store uses the information 
     /// in the <description> tag.
-    public var iTunesSummary: String?
+    public var iTunesSummary: String? = nil
 
     /// Note: The keywords tag is deprecated by Apple and no longer documented in 
     /// the official list of tags. However many podcasts still use the tags and it 
@@ -207,7 +230,7 @@ public class ITunesNamespace {
     /// Limited to 255 characters or less, plain text, no HTML, words must be 
     /// separated by spaces.
     /// This tag is applicable to the Item element only.
-    public var iTunesKeywords: String?
+    public var iTunesKeywords: String? = nil
 
     /// Use the <itunes:type> tag to indicate how you intend for episodes to be
     /// presented. You can specify the following values:
@@ -216,7 +239,7 @@ public class ITunesNamespace {
     /// episodes to be presented newest-to-oldest. This is the default behavior
     /// in the iTunes Store if the tag is excluded. If you specify serial it
     /// means you intend for episodes to be presented oldest-to-newest.
-    public var iTunesType: String?
+    public var iTunesType: String? = nil
 
     /// Use the <itunes:episodeType> tag to indicate what type of show item the
     /// entry is. You can specify the following values:
@@ -224,17 +247,17 @@ public class ITunesNamespace {
     /// full | trailer | bonus. If you specify full, it means this is the full
     /// content of a show. Trailer means this is a preview of the show. Bonus
     /// means it is extra content for a show.
-    public var iTunesEpisodeType: String?
+    public var iTunesEpisodeType: String? = nil
 
     /// Use the <itunes:season> tag to indicate which season the item is part of.
     ///
     /// Note: The iTunes Store & Apple Podcasts does not show the season number
     /// until a feed contains at least two seasons.
-    public var iTunesSeason: Int?
+    public var iTunesSeason: Int? = nil
 
     /// Use the <itunes:episode> tag in conjunction with the <itunes:season> tag
     /// to indicate the order an episode should be presented within a season.
-    public var iTunesEpisode: Int?
+    public var iTunesEpisode: Int? = nil
     
     public init() { }
 

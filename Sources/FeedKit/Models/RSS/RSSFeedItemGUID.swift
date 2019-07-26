@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// A string that uniquely identifies the item.
 /// 
@@ -50,10 +51,19 @@ import Foundation
 /// isPermaLink is optional, its default value is true. If its value is false,
 /// the guid may not be assumed to be a url, or a url to anything in
 /// particular.
-public class RSSFeedItemGUID {
+public class RSSFeedItemGUID: Mappable {
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            isPermaLink <- map["isPermaLink"]
+        }
         
         /// If the guid element has an attribute named "isPermaLink" with a value of
         /// true, the reader may assume that it is a permalink to the item, that is,
@@ -65,15 +75,17 @@ public class RSSFeedItemGUID {
         /// isPermaLink is optional, its default value is true. If its value is false,
         /// the guid may not be assumed to be a url, or a url to anything in
         /// particular.
-        public var isPermaLink: Bool?
-        
+        public var isPermaLink: Bool? = nil
+        init() {
+            
+        }
     }
     
     /// The element's attributes.
-    public var attributes: Attributes?
+    public var attributes: Attributes? = nil
     
     /// The element's value.
-    public var value: String?
+    public var value: String? = nil
     
     public init() { }
     

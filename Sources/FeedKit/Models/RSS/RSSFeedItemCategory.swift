@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Includes the item in one or more categories.
 /// 
@@ -43,24 +44,36 @@ import Foundation
 /// You may include as many category elements as you need to, for different
 /// domains, and to have an item cross-referenced in different parts of the
 /// same domain.
-public class RSSFeedItemCategory {
+public class RSSFeedItemCategory: Mappable {
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
+    
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            domain <- map["domain"]
+        }
         
         /// A string that identifies a categorization taxonomy. It's an optional 
         /// attribute of `<category>`.
         /// 
         /// Example: http://www.fool.com/cusips
-        public var domain: String?
-        
+        public var domain: String? = nil
+        init() {
+            
+        }
     }
     
     /// The element's attributes.
-    public var attributes: Attributes?
+    public var attributes: Attributes? = nil
     
     /// The element's value.
-    public var value: String?
+    public var value: String? = nil
     
     public init() { }
     
