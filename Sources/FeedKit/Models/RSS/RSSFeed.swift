@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Data model for the XML DOM of the RSS 2.0 Specification
 /// See http://cyber.law.harvard.edu/rss/rss.html

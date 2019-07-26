@@ -1,0 +1,6 @@
+framework module Pods_FeedKit_watchOS {
+  umbrella header "Pods-FeedKit watchOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_FeedKit_macOS_Tests {
+  umbrella header "Pods-FeedKit macOS Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
