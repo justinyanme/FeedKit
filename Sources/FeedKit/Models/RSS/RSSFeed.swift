@@ -35,7 +35,35 @@ import ObjectMapper
 /// 
 /// Subordinate to the <rss> element is a single <channel> element, which
 /// contains information about the channel (metadata) and its contents.
-public class RSSFeed {
+public class RSSFeed: Mappable {
+    public required init?(map: Map) {}
+    
+    public func mapping(map: Map) {
+        title <- map["title"]
+        link <- map["link"]
+        description <- map["description"]
+        language <- map["language"]
+        copyright <- map["copyright"]
+        managingEditor <- map["managingEditor"]
+        webMaster <- map["webMaster"]
+        pubDate <- map["pubDate"]
+        lastBuildDate <- map["lastBuildDate"]
+        categories <- map["categories"]
+        generator <- map["generator"]
+        docs <- map["docs"]
+        cloud <- map["cloud"]
+        rating <- map["rating"]
+        ttl <- map["ttl"]
+        //        image <- map["image"]
+        //        textInput <- map["textInput"]
+        //        skipHours <- map["skipHours"]
+        //        skipDays <- map["skipDays"]
+        items <- map["items"]
+        //        dublinCore <- map["dublinCore"]
+        //        syndication <- map["syndication"]
+        //        iTunes <- map["iTunes"]
+    }
+    
 
     /// The name of the channel. It's how people refer to your service. If 
     /// you have an HTML website that contains the same information as your 
@@ -43,18 +71,18 @@ public class RSSFeed {
     /// of your website.
     /// 
     /// Example: GoUpstate.com News Headlines
-    public var title: String?
+    public var title: String? = nil
     
     /// The URL to the HTML website corresponding to the channel.
     /// 
     /// Example: http://www.goupstate.com/
-    public var link: String?
+    public var link: String? = nil
     
     /// Phrase or sentence describing the channel. 
     /// 
     /// Example: The latest news from GoUpstate.com, a Spartanburg Herald-Journal
     /// Web site.
-    public var description: String?
+    public var description: String? = nil
     
     /// The language the channel is written in. This allows aggregators to group 
     /// all Italian language sites, for example, on a single page. A list of 
@@ -65,23 +93,23 @@ public class RSSFeed {
     /// http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
     /// 
     /// Example: en-us
-    public var language: String?
+    public var language: String? = nil
     
     /// Copyright notice for content in the channel.
     /// 
     /// Example: Copyright 2002, Spartanburg Herald-Journal
-    public var copyright: String?
+    public var copyright: String? = nil
     
     /// Email address for person responsible for editorial content.
     /// 
     /// Example: geo@herald.com (George Matesky)
-    public var managingEditor: String?
+    public var managingEditor: String? = nil
     
     /// Email address for person responsible for technical issues relating to 
     /// channel.
     /// 
     /// Example: betty@herald.com (Betty Guernsey)
-    public var webMaster: String?
+    public var webMaster: String? = nil
     
     /// The publication date for the content in the channel. For example, the 
     /// New York Times publishes on a daily basis, the publication date flips 
@@ -91,23 +119,23 @@ public class RSSFeed {
     /// characters or four characters (four preferred).
     /// 
     /// Example: Sat, 07 Sep 2002 00:00:01 GMT
-    public var pubDate: Date?
+    public var pubDate: Date? = nil
     
     /// The last time the content of the channel changed.
     /// 
     /// Example: Sat, 07 Sep 2002 09:42:31 GMT
-    public var lastBuildDate: Date?
+    public var lastBuildDate: Date? = nil
     
     /// Specify one or more categories that the channel belongs to. Follows the 
     /// same rules as the <item>-level category element.
     /// 
     /// Example: Newspapers
-    public var categories: [RSSFeedCategory]?
+    public var categories: [RSSFeedCategory]? = nil
     
     /// A string indicating the program used to generate the channel.
     /// 
     /// Example: MightyInHouse Content System v2.3
-    public var generator: String?
+    public var generator: String? = nil
     
     /// A URL that points to the documentation for the format used in the RSS 
     /// file. It's probably a pointer to this page. It's for people who might 
@@ -115,7 +143,7 @@ public class RSSFeed {
     /// what it is.
     /// 
     /// Example: http://blogs.law.harvard.edu/tech/rss
-    public var docs: String?
+    public var docs: String? = nil
     
     /// Allows processes to register with a cloud to be notified of updates to 
     /// the channel, implementing a lightweight publish-subscribe protocol for 
@@ -140,10 +168,10 @@ public class RSSFeed {
     /// 
     /// A full explanation of this element and the rssCloud interface is here:
     /// http://cyber.law.harvard.edu/rss/soapMeetsRss.html#rsscloudInterface
-    public var cloud: RSSFeedCloud?
+    public var cloud: RSSFeedCloud? = nil
 
     /// The PICS rating for the channel.
-    public var rating: String?
+    public var rating: String? = nil
     
     /// ttl stands for time to live. It's a number of minutes that indicates how 
     /// long a channel can be cached before refreshing from the source. 
@@ -156,7 +184,7 @@ public class RSSFeed {
     /// long a channel can be cached before refreshing from the source. This makes
     /// it possible for RSS sources to be managed by a file-sharing network such 
     /// as Gnutella.
-    public var ttl: Int?
+    public var ttl: Int? = nil
     
     /// Specifies a GIF, JPEG or PNG image that can be displayed with the channel.
     ///
@@ -180,7 +208,7 @@ public class RSSFeed {
     /// Maximum value for width is 144, default value is 88.
     /// 
     /// Maximum value for height is 400, default value is 31.
-    public var image: RSSFeedImage?
+    public var image: RSSFeedImage? = nil
     
     /// Specifies a text input box that can be displayed with the channel.
     /// 
@@ -198,7 +226,7 @@ public class RSSFeed {
     /// The purpose of the <textInput> element is something of a mystery. You can
     /// use it to specify a search engine box. Or to allow a reader to provide 
     /// feedback. Most aggregators ignore it.
-    public var textInput: RSSFeedTextInput?
+    public var textInput: RSSFeedTextInput? = nil
     
     /// A hint for aggregators telling them which hours they can skip.
     /// 
@@ -208,7 +236,7 @@ public class RSSFeed {
     /// element.
     /// 
     /// The hour beginning at midnight is hour zero.
-    public var skipHours: [RSSFeedSkipHour]?
+    public var skipHours: [RSSFeedSkipHour]? = nil
     
     /// A hint for aggregators telling them which days they can skip.
     /// 
@@ -216,7 +244,7 @@ public class RSSFeed {
     /// is Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday. 
     /// Aggregators may not read the channel during days listed in the skipDays 
     /// element.
-    public var skipDays: [RSSFeedSkipDay]?
+    public var skipDays: [RSSFeedSkipDay]? = nil
     
     /// A channel may contain any number of <item>s. An item may represent a 
     /// "story" -- much like a story in a newspaper or magazine; if so its 
@@ -226,7 +254,7 @@ public class RSSFeed {
     /// http://cyber.law.harvard.edu/rss/encodingDescriptions.html), and
     /// the link and title may be omitted. All elements of an item are optional, 
     /// however at least one of title or description must be present.
-    public var items: [RSSFeedItem]?
+    public var items: [RSSFeedItem]? = nil
     
     
     // MARK: - Namespaces
@@ -235,7 +263,7 @@ public class RSSFeed {
     /// resource description.
     /// 
     /// See https://tools.ietf.org/html/rfc5013
-    public var dublinCore: DublinCoreNamespace?
+    public var dublinCore: DublinCoreNamespace? = nil
     
     /// Provides syndication hints to aggregators and others picking up this RDF Site
     /// Summary (RSS) feed regarding how often it is updated. For example, if you
@@ -245,11 +273,11 @@ public class RSSFeed {
     /// skipDay and skipHour elements.
     /// 
     /// See http://web.resource.org/rss/1.0/modules/syndication/
-    public var syndication: SyndicationNamespace?
+    public var syndication: SyndicationNamespace? = nil
 
     /// iTunes Podcasting Tags are de facto standard for podcast syndication.
     /// See https://help.apple.com/itc/podcasts_connect/#/itcb54353390
-    public var iTunes: ITunesNamespace?
+    public var iTunes: ITunesNamespace? = nil
     
     public init() { }
     

@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Allows processes to register with a cloud to be notified of updates to
 /// the channel, implementing a lightweight publish-subscribe protocol for
@@ -47,28 +48,45 @@ import Foundation
 /// 
 /// A full explanation of this element and the rssCloud interface is here:
 /// http://cyber.law.harvard.edu/rss/soapMeetsRss.html#rsscloudInterface
-public class RSSFeedCloud {
+public class RSSFeedCloud: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        attributes <- map["attributes"]
+    }
     
     /// The attributes of the `<channel>`'s `<cloud>` element.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            domain <- map["domain"]
+            port <- map["port"]
+            path <- map["path"]
+            registerProcedure <- map["registerProcedure"]
+            protocolSpecification <- map["protocolSpecification"]
+        }
+        init() {
+            
+        }
         
         /// The domain to register notification to.
-        public var domain: String?
+        public var domain: String? = nil
         
         /// The port to connect to.
-        public var port: Int?
+        public var port: Int? = nil
         
         /// The path to the RPC service. e.g. "/RPC2".
-        public var path: String?
+        public var path: String? = nil
         
         /// The procedure to call. e.g. "myCloud.rssPleaseNotify" .
-        public var registerProcedure: String?
+        public var registerProcedure: String? = nil
         
         /// The `protocol` specification. Can be HTTP-POST, XML-RPC or SOAP 1.1 - 
         /// Note: "protocol" is a reserved keyword, so `protocolSpecification` 
         /// is used instead and refers to the `protocol` attribute of the `cloud`
         /// element.
-        public var protocolSpecification: String?
+        public var protocolSpecification: String? = nil
         
     }
     

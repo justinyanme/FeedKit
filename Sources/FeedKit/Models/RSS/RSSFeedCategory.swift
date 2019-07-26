@@ -23,25 +23,38 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// The category of `<channel>`. Identifies a category or tag to which the feed 
 /// belongs.
-public class RSSFeedCategory {
+public class RSSFeedCategory: Mappable {
+    public required init?(map: Map) {}
+    
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
+    
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            domain <- map["domain"]
+        }
+        init() {}
         
         /// A string that identifies a categorization taxonomy. It's an optional 
         /// attribute of `<category>`. e.g. "http://www.fool.com/cusips"
-        public var domain: String?
+        public var domain: String? = nil
         
     }
     
     /// The element's attributes.
-    public var attributes: Attributes?
+    public var attributes: Attributes? = nil
     
     /// The element's value.
-    public var value: String?
+    public var value: String? = nil
     
     public init() { }
     
