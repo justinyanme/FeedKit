@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Describes the individual path for each XML DOM element of an RDF feed
 ///

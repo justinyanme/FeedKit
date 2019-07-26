@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Specifies a GIF, JPEG or PNG image that can be displayed with the channel.
 /// 
@@ -46,7 +47,18 @@ import Foundation
 /// Maximum value for width is 144, default value is 88.
 /// 
 /// Maximum value for height is 400, default value is 31.
-public class RSSFeedImage {
+public class RSSFeedImage: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        url <- map["url"]
+        title <- map["title"]
+        link <- map["link"]
+        width <- map["width"]
+        height <- map["height"]
+        description <- map["description"]
+
+    }
     
     /// The URL of a GIF, JPEG or PNG image that represents the channel.
     public var url: String?

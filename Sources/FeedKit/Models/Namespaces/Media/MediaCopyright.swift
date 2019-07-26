@@ -23,12 +23,27 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Copyright information for the media object. It has one optional attribute.
-public class MediaCopyright {
+public class MediaCopyright: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            url <- map["url"]
+        }
         
         /// The URL for a terms of use page or additional copyright information. 
         /// If the media is operating under a Creative Commons license, the 

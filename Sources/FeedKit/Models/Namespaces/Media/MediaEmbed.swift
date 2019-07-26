@@ -23,31 +23,48 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Sometimes player-specific embed code is needed for a player to play any
 /// video. <media:embed> allows inclusion of such information in the form of
 /// key-value pairs.
-public class MediaEmbed {
+public class MediaEmbed: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        mediaParams <- map["mediaParams"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            url <- map["url"]
+            width <- map["width"]
+            height <- map["height"]
+        }
         
         /// The location of the embeded media.
-        public var url: String?
+        public var url: String? = nil
         
         /// The width size for the embeded Media.
-        public var width: Int?
+        public var width: Int? = nil
         
         /// The height size for the embeded Media.
-        public var height: Int?
+        public var height: Int? = nil
         
     }
     
     /// The element's attributes.
-    public var attributes: Attributes?
+    public var attributes: Attributes? = nil
     
     /// Key-Value pairs with aditional parameters for the embeded Media.
-    public var mediaParams: [MediaParam]?
+    public var mediaParams: [MediaParam]? = nil
     
     public init() { }
 

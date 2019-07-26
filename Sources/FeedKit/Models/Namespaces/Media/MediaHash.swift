@@ -23,13 +23,28 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// This is the hash of the binary media file. It can appear multiple times as
 /// long as each instance is a different algo. It has one optional attribute.
-public class MediaHash {
+public class MediaHash: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            algo <- map["algo"]
+        }
         
         /// This is the hash of the binary media file. It can appear multiple times as long as 
         /// each instance is a different algo. It has one optional attribute.

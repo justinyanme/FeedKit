@@ -23,14 +23,30 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Optional element to specify geographical information about various
 /// locations captured in the content of a media object. The format conforms
 /// to geoRSS.
-public class MediaLocation {
+public class MediaLocation: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        latitude <- map["latitude"]
+        longitude <- map["longitude"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {}
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            description <- map["description"]
+            start <- map["start"]
+            end <- map["end"]
+        }
         
         /// Description of the place whose location is being specified.
         public var description: String?

@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Allows restrictions to be placed on the aggregator rendering the media in
 /// the feed. Currently, restrictions are based on distributor (URI), country
@@ -34,10 +35,25 @@ import Foundation
 /// literals are reserved: "all", "none". These literals can only be used once.
 /// This element has one required attribute and one optional attribute (with
 /// strict requirements for its exclusion).
-public class MediaRestriction {
+public class MediaRestriction: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            relationship <- map["relationship"]
+            type <- map["type"]
+        }
         
         /// Indicates the type of relationship that the restriction represents 
         /// (allow | deny). In the example above, the media object should only be 

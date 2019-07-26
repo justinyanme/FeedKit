@@ -23,16 +23,32 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Notable entity and the contribution to the creation of the media object.
 /// Current entities can include people, companies, locations, etc. Specific
 /// entities can have multiple roles, and several entities can have the same
 /// role. These should appear as distinct <media:credit> elements. It has two
 /// optional attributes.
-public class MediaCredit {
+public class MediaCredit: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            role <- map["role"]
+            scheme <- map["scheme"]
+        }
         
         /// Specifies the role the entity played. Must be lowercase. It is an 
         /// optional attribute.

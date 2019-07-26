@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Describes a media object that is attached to the item.
 /// 
@@ -36,30 +37,45 @@ import Foundation
 /// 
 /// <enclosure url="http://www.scripting.com/mp3s/weatherReportSuite.mp3" 
 /// length="12216320" type="audio/mpeg" />
-public class RSSFeedItemEnclosure {
+public class RSSFeedItemEnclosure: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            url <- map["url"]
+            length <- map["length"]
+            type <- map["type"]
+        }
+        init() {
+            
+        }
         
         /// Where the enclosure is located.
         /// 
         /// Example: http://www.scripting.com/mp3s/weatherReportSuite.mp3
-        public var url: String?
+        public var url: String? = nil
         
         /// How big the media object is in bytes.
         /// 
         /// Example: 12216320
-        public var length: Int64?
+        public var length: Int64? = nil
         
         /// Standard MIME type.
         /// 
         /// Example: audio/mpeg
-        public var type: String?
+        public var type: String? = nil
         
     }
     
     /// The element's attributes.
-    public var attributes: Attributes?
+    public var attributes: Attributes? = nil
     
     public init() { }
     

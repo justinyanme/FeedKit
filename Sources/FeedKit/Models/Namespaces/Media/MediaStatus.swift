@@ -23,13 +23,25 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Optional tag to specify the status of a media object -- whether it's still
 /// active or it has been blocked/deleted.
-public class MediaStatus {
+public class MediaStatus: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        init() {}
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            state <- map["state"]
+            reason <- map["reason"]
+        }
         
         /// State can have values "active", "blocked" or "deleted". "active" means 
         /// a media object is active in the system, "blocked" means a media object 

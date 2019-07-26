@@ -54,14 +54,14 @@ public class RSSFeed: Mappable {
         cloud <- map["cloud"]
         rating <- map["rating"]
         ttl <- map["ttl"]
-        //        image <- map["image"]
-        //        textInput <- map["textInput"]
-        //        skipHours <- map["skipHours"]
-        //        skipDays <- map["skipDays"]
+        image <- map["image"]
+        textInput <- map["textInput"]
+        skipHours <- map["skipHours"]
+        skipDays <- map["skipDays"]
         items <- map["items"]
-        //        dublinCore <- map["dublinCore"]
-        //        syndication <- map["syndication"]
-        //        iTunes <- map["iTunes"]
+        dublinCore <- map["dublinCore"]
+        syndication <- map["syndication"]
+        iTunes <- map["iTunes"]
     }
     
 

@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Optional element to specify various scenes within a media object. It can
 /// have multiple child <media:scene> elements, where each <media:scene>
@@ -30,7 +31,15 @@ import Foundation
 /// the optional sub-elements <sceneTitle>, <sceneDescription>,
 /// <sceneStartTime> and <sceneEndTime>, which contains title, description,
 /// start and end time of a particular scene in the media, respectively.
-public class MediaScene {
+public class MediaScene: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        sceneTitle <- map["sceneTitle"]
+        sceneDescription <- map["sceneDescription"]
+        sceneStartTime <- map["sceneStartTime"]
+        sceneEndTime <- map["sceneEndTime"]
+    }
     
     /// The scene's title.
     public var sceneTitle: String?

@@ -23,13 +23,27 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Optional link to specify the machine-readable license associated with the
 /// content.
-public class MediaLicence {
+public class MediaLicence: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {}
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            type <- map["type"]
+            href <- map["href"]
+        }
         
         /// The licence type.
         public var type: String?

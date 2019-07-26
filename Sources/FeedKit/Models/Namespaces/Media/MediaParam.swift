@@ -23,12 +23,27 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Key-Value pairs with aditional parameters for the embeded Media.
-public class MediaParam {
+public class MediaParam: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            name <- map["name"]
+        }
         
         /// The parameter's key name.
         public var name: String?

@@ -23,13 +23,30 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// This element specifies the rating-related information about a media object.
 /// Valid attributes are average, count, min and max.
-public class MediaStarRating {
+public class MediaStarRating: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            average <- map["value"]
+            count <- map["count"]
+            min <- map["min"]
+            max <- map["max"]
+        }
         
         /// The star rating's average.
         public var average: Double?

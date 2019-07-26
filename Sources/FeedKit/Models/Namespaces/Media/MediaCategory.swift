@@ -23,13 +23,29 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Allows a taxonomy to be set that gives an indication of the type of media
 /// content, and its particular contents. It has two optional attributes.
-public class MediaCategory {
+public class MediaCategory: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            scheme <- map["scheme"]
+            label <- map["label"]
+        }
         
         /// The URI that identifies the categorization scheme. It is an optional 
         /// attribute. If this attribute is not included, the default scheme

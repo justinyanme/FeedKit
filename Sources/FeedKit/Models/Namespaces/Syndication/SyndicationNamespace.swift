@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Provides syndication hints to aggregators and others picking up this RDF Site 
 /// Summary (RSS) feed regarding how often it is updated. For example, if you 
@@ -32,7 +33,14 @@ import Foundation
 /// skipDay and skipHour elements.
 /// 
 /// See http://web.resource.org/rss/1.0/modules/syndication/
-public class SyndicationNamespace {
+public class SyndicationNamespace: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        syUpdatePeriod <- map["syUpdatePeriod"]
+        syUpdateFrequency <- map["syUpdateFrequency"]
+        syUpdateBase <- map["syUpdateBase"]
+    }
     
     /// Describes the period over which the channel format is updated. Acceptable 
     /// values are: hourly, daily, weekly, monthly, yearly. If omitted, daily is 

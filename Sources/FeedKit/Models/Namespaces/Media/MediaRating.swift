@@ -23,14 +23,28 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// This allows the permissible audience to be declared. If this element is not 
 /// included, it assumes that no restrictions are necessary. It has one optional 
 /// attribute.
-public class MediaRating {
+public class MediaRating: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            scheme <- map["scheme"]
+        }
         
         /// The URI that identifies the rating scheme. It is an optional attribute. 
         /// If this attribute is not included, the default scheme is urn:simple (adult | nonadult).

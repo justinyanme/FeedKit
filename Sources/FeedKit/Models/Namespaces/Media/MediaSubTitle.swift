@@ -23,13 +23,29 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Optional link to specify the machine-readable license associated with the
 /// content.
-public class MediaSubTitle {
+public class MediaSubTitle: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            type <- map["type"]
+            lang <- map["lang"]
+            href <- map["href"]
+        }
         
         /// The type of the subtitle.
         public var type: String?

@@ -23,12 +23,27 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// The title of the particular media object. It has one optional attribute.
-public class MediaTitle {
+public class MediaTitle: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            type <- map["type"]
+        }
         
         /// Specifies the type of text embedded. Possible values are either "plain" or "html". 
         /// Default value is "plain". All HTML must be entity-encoded. It is an optional attribute.

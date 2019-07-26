@@ -23,13 +23,20 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// This element contains user-generated tags separated by commas in the decreasing 
 /// order of each tag's weight. Each tag can be assigned an integer weight in 
 /// tag_name:weight format. It's up to the provider to choose the way weight is 
 /// determined for a tag; for example, number of occurences can be one way to 
 /// decide weight of a particular tag. Default weight is 1.
-public class MediaTag {
+public class MediaTag: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        tag <- map["tag"]
+        weight <- map["weight"]
+    }
     
     /// The tag name.
     public var tag: String?

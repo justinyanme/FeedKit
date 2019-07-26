@@ -23,13 +23,22 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// The <media:group> element is a sub-element of <item>. It allows grouping
 /// of <media:content> elements that are effectively the same content,
 /// yet different representations. For instance: the same song recorded
 /// in both the WAV and MP3 format. It's an optional element that must
 /// only be used for this purpose.
-public class MediaGroup {
+public class MediaGroup: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        mediaContents <- map["mediaContents"]
+        mediaCredits <- map["mediaCredits"]
+        mediaCategory <- map["mediaCategory"]
+        mediaRating <- map["mediaRating"]
+    }
     
     /// <media:content> is a sub-element of either <item> or <media:group>.
     /// Media objects that are not the same content should not be included

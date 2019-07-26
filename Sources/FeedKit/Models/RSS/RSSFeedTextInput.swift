@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Specifies a text input box that can be displayed with the channel.
 /// 
@@ -40,7 +41,15 @@ import Foundation
 /// The purpose of the <textInput> element is something of a mystery. You can
 /// use it to specify a search engine box. Or to allow a reader to provide
 /// feedback. Most aggregators ignore it.
-public class RSSFeedTextInput {
+public class RSSFeedTextInput: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        title <- map["title"]
+        description <- map["description"]
+        name <- map["name"]
+        link <- map["link"]
+    }
     
     /// The label of the Submit button in the text input area.
     public var title: String?

@@ -23,16 +23,31 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Optional tag to include pricing information about a media object. If this
 /// tag is not present, the media object is supposed to be free. One media
 /// object can have multiple instances of this tag for including different
 /// pricing structures. The presence of this tag would mean that media object
 /// is not free.
-public class MediaPrice {
+public class MediaPrice: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        init() {}
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            type <- map["type"]
+            price <- map["price"]
+            info <- map["info"]
+            currency <- map["currency"]
+        }
         
         /// Valid values are "rent", "purchase", "package" or "subscription". If 
         /// nothing is specified, then the media is free.

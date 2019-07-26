@@ -23,12 +23,26 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Optional element for P2P link.
-public class MediaPeerLink {
+public class MediaPeerLink: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {}
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            type <- map["type"]
+            href <- map["href"]
+        }
         
         /// The peer link's type.
         public var type: String?

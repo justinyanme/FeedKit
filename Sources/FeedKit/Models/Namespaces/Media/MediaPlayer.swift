@@ -23,15 +23,32 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Allows the media object to be accessed through a web browser media player
 /// console. This element is required only if a direct media url attribute is
 /// not specified in the <media:content> element. It has one required attribute
 /// and two optional attributes.
-public class MediaPlayer {
+public class MediaPlayer: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        init() {
+            
+        }
+        
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            url <- map["url"]
+            width <- map["width"]
+            height <- map["height"]
+        }
         
         /// The URL of the player console that plays the media. It is a required attribute.
         public var url: String?

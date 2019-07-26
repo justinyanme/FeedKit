@@ -23,15 +23,33 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Allows particular images to be used as representative images for the
 /// media object. If multiple thumbnails are included, and time coding is not
 /// at play, it is assumed that the images are in order of importance. It has
 /// one required attribute and three optional attributes.
-public class MediaThumbnail {
+public class MediaThumbnail: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            url <- map["url"]
+            width <- map["width"]
+            height <- map["height"]
+            time <- map["time"]
+        }
         
         /// Specifies the url of the thumbnail. It is a required attribute.
         public var url: String?

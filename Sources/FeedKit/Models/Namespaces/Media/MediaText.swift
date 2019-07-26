@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Allows the inclusion of a text transcript, closed captioning or lyrics of
 /// the media content. Many of these elements are permitted to provide a time
@@ -30,10 +31,27 @@ import Foundation
 /// elements be grouped by language and appear in time sequence order based on
 /// the start time. Elements can have overlapping start and end times. It has
 /// four optional attributes.
-public class MediaText {
+public class MediaText: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        value <- map["value"]
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            type <- map["type"]
+            lang <- map["lang"]
+            start <- map["start"]
+            end <- map["end"]
+        }
         
         /// Specifies the type of text embedded. Possible values are either "plain"
         /// or "html". Default value is "plain". All HTML must be entity-encoded. 

@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// <media:content> is a sub-element of either <item> or <media:group>.
 /// Media objects that are not the same content should not be included
@@ -30,30 +31,60 @@ import Foundation
 /// the order of presentation. While many of the attributes appear to be
 /// audio/video specific, this element can be used to publish any type of
 /// media. It contains 14 attributes, most of which are optional.
-public class MediaContent {
+public class MediaContent: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        mediaTitle <- map["mediaTitle"]
+        mediaDescription <- map["mediaDescription"]
+        mediaPlayer <- map["mediaPlayer"]
+        mediaThumbnails <- map["mediaThumbnails"]
+        attributes <- map["attributes"]
+    }
     
     /// The title of the particular media object. It has one optional attribute.
-    public var mediaTitle: MediaTitle?
+    public var mediaTitle: MediaTitle? = nil
     
     /// Short description describing the media object typically a sentence in
     /// length. It has one optional attribute.
-    public var mediaDescription: MediaDescription?
+    public var mediaDescription: MediaDescription? = nil
     
     /// Allows the media object to be accessed through a web browser media player
     /// console. This element is required only if a direct media url attribute is
     /// not specified in the <media:content> element. It has one required attribute
     /// and two optional attributes.
-    public var mediaPlayer: MediaPlayer?
+    public var mediaPlayer: MediaPlayer? = nil
     
     /// Allows particular images to be used as representative images for the
     /// media object. If multiple thumbnails are included, and time coding is not
     /// at play, it is assumed that the images are in order of importance. It has
     /// one required attribute and three optional attributes.
-    public var mediaThumbnails: [MediaThumbnail]?
+    public var mediaThumbnails: [MediaThumbnail]? = nil
     
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        public required init?(map: Map) {}
+        init() {
+            
+        }
+        public func mapping(map: Map) {
+            url <- map["url"]
+            fileSize <- map["fileSize"]
+            type <- map["type"]
+            medium <- map["medium"]
+            isDefault <- map["isDefault"]
+            expression <- map["expression"]
+            bitrate <- map["bitrate"]
+            framerate <- map["framerate"]
+            samplingrate <- map["samplingrate"]
+            channels <- map["channels"]
+            duration <- map["duration"]
+            height <- map["height"]
+            width <- map["width"]
+            lang <- map["lang"]
+        }
         
         /// Should specify the direct URL to the media object. If not included, 
         /// a <media:player> element must be specified.

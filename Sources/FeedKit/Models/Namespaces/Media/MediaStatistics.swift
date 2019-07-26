@@ -23,13 +23,28 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// This element specifies various statistics about a media object like the
 /// view count and the favorite count. Valid attributes are views and favorites.
-public class MediaStatistics {
+public class MediaStatistics: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+                
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            views <- map["views"]
+            favorites <- map["favorites"]
+        }
         
         /// The number of views.
         public var views: Int?

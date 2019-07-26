@@ -23,12 +23,26 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Optional element to specify the rights information of a media object.
-public class MediaRights {
+public class MediaRights: Mappable {
+    
+    public required init?(map: Map) {}
+    public func mapping(map: Map) {
+        attributes <- map["attributes"]
+    }
     
     /// The element's attributes.
-    public class Attributes {
+    public class Attributes: Mappable {
+        
+        init() {
+            
+        }
+        public required init?(map: Map) {}
+        public func mapping(map: Map) {
+            status <- map["status"]
+        }
         
         /// Is the status of the media object saying whether a media object has 
         /// been created by the publisher or they have rights to circulate it. 
